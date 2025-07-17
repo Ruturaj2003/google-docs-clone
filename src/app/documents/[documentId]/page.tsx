@@ -1,3 +1,5 @@
+import { Editor } from "./editor";
+
 interface DocumentIdPageProps{
     params:Promise<{documentId:string}>
 }
@@ -9,6 +11,7 @@ const {documentId}  = await params
 
         <>
         <h1>Doc Id   {documentId}</h1>
+        <Editor></Editor>
         </>
      );
 }
