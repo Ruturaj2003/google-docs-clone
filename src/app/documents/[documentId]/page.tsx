@@ -10,8 +10,10 @@ const {documentId}  = await params
     return ( 
 
         <>
-        <h1>Doc Id   {documentId}</h1>
+        <div className="min-h-screen bg-[#e8eced]" >
         <Editor></Editor>
+        {documentId}
+        </div>
         </>
      );
 }
