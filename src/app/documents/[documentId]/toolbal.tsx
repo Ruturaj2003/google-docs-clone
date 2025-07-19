@@ -3,9 +3,12 @@ import { cn } from "@/lib/utils";
 import {
   BoldIcon,
   ItalicIcon,
+  ListTodoIcon,
   LucideIcon,
+  MessageSquarePlusIcon,
   PrinterIcon,
   Redo2Icon,
+  RemoveFormattingIcon,
   SpellCheckIcon,
   Underline,
   Undo2Icon,
@@ -107,6 +110,25 @@ export const Toolbar = () => {
         },
       },
     ],
+    [
+      {
+        label: "Comment",
+        icon: MessageSquarePlusIcon,
+        onClick: () => console.log("TODO : Comment"),
+        isActive: false, // TODO : Enable this func
+      },
+      {
+        label: "List Todo",
+        icon: ListTodoIcon,
+        onClick: () => editor?.chain().focus().toggleTaskList().run(),
+        isActive: editor?.isActive("taskList"),
+      },
+      {
+        label: "Remove Formatting",
+        icon: RemoveFormattingIcon,
+        onClick: () => editor?.chain().focus().unsetAllMarks().run(),
+      },
+    ],
   ];
 
   return (
@@ -117,14 +139,23 @@ export const Toolbar = () => {
         })}
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         {/* Font Fmaily */}
-
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-
         {/* Heading */}
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         {/* Font size */}
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         {sections[1].map((item) => {
+          return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
+        })}
+        {/* Text Color */}
+        {/* Highlight Color */}
+        <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+        {/*  Link*/}
+        {/* Image  */}
+        {/* Align */}
+        {/* Line Height */}
+        {/* List */}
+        {sections[2].map((item) => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
       </div>
