@@ -1,13 +1,17 @@
 "use client";
 import { cn } from "@/lib/utils";
 import {
+  BoldIcon,
+  ItalicIcon,
   LucideIcon,
   PrinterIcon,
   Redo2Icon,
   SpellCheckIcon,
+  Underline,
   Undo2Icon,
 } from "lucide-react";
 import { useEditorStore } from "./use-editor-store";
+import { Separator } from "@/components/ui/separator";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -77,12 +81,50 @@ export const Toolbar = () => {
         },
       },
     ],
+    [
+      {
+        label: "Bold",
+        icon: BoldIcon,
+        isActive: editor?.isActive("bold"),
+        onClick: () => {
+          editor?.chain().focus().toggleBold().run();
+        },
+      },
+      {
+        label: "Italic",
+        icon: ItalicIcon,
+        isActive: editor?.isActive("italic"),
+        onClick: () => {
+          editor?.chain().focus().toggleItalic().run();
+        },
+      },
+      {
+        label: "Underline",
+        icon: Underline,
+        isActive: editor?.isActive("underline"),
+        onClick: () => {
+          editor?.chain().focus().toggleUnderline().run();
+        },
+      },
+    ],
   ];
 
   return (
     <>
-      <div className=" bg-[#F1f4f8] overflow-x-auto px-2.5 py-0.5 rounded-xl min-h-[48px] flex items-center gap-x-0.5 shadow-sm  ">
+      <div className=" bg-[#F1f4f8] overflow-x-auto px-2.5 py-0.5 rounded-xl min-h-[48px] flex  items-center gap-x-0.5 shadow-sm  ">
         {sections[0].map((item) => {
+          return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
+        })}
+        <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+        {/* Font Fmaily */}
+
+        <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+
+        {/* Heading */}
+        <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+        {/* Font size */}
+        <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+        {sections[1].map((item) => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
       </div>
