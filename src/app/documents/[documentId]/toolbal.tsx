@@ -14,6 +14,7 @@ import {
   Underline,
   Undo2Icon,
 } from "lucide-react";
+
 import { useEditorStore } from "./use-editor-store";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -23,7 +24,38 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { type Level } from "@tiptap/extension-heading";
+import { type ColorResult, CirclePicker } from "react-color";
 
+const TextColorButton = () => {
+  const { editor } = useEditorStore();
+
+  const value = editor?.getAttributes("textStyle").color || "#000000";
+
+  const onChange = (color: ColorResult) => {
+    editor?.chain().focus().setColor(color.hex).run();
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={
+            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          }
+        >
+          <span className="text-xs">A</span>
+          <div
+            className="h-0.5 w-full"
+            style={{ backgroundColor: value }}
+          ></div>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-2.5">
+        <CirclePicker color={value} onChange={onChange}></CirclePicker>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 const HeadingLevelButton = () => {
   const { editor } = useEditorStore();
 
@@ -299,7 +331,7 @@ export const Toolbar = () => {
         {sections[1].map((item) => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
-        {/* Text Color */}
+        <TextColorButton></TextColorButton>
         {/* Highlight Color */}
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         {/*  Link*/}

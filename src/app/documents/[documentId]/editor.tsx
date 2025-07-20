@@ -12,6 +12,8 @@ import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import ImageResize from "tiptap-extension-resize-image";
 import StarterKit from "@tiptap/starter-kit";
+import Highlight from "@tiptap/extension-highlight";
+import { Color } from "@tiptap/extension-color";
 import { useEditorStore } from "./use-editor-store";
 
 export const Editor = () => {
@@ -67,6 +69,8 @@ export const Editor = () => {
         types: ["textStyle"],
       }),
       TextStyle,
+      Highlight.configure({ multicolor: true }),
+      Color,
     ],
     content: `
         <table>
