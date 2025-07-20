@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import {
   BoldIcon,
   ChevronDownIcon,
+  HighlighterIcon,
   ItalicIcon,
   ListTodoIcon,
   LucideIcon,
@@ -24,7 +25,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { type Level } from "@tiptap/extension-heading";
-import { type ColorResult, CirclePicker } from "react-color";
+import { type ColorResult, CompactPicker } from "react-color";
+
+const HighlightColorButton = () => {
+  const { editor } = useEditorStore();
+
+  const onChange = (color: ColorResult) => {
+    editor?.chain().focus().setHighlight({ color: color.hex }).run();
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={
+            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          }
+        >
+          <HighlighterIcon className="size-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-2.5">
+        <CompactPicker onChange={onChange} />
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const TextColorButton = () => {
   const { editor } = useEditorStore();
@@ -44,14 +70,11 @@ const TextColorButton = () => {
           }
         >
           <span className="text-xs">A</span>
-          <div
-            className="h-0.5 w-full"
-            style={{ backgroundColor: value }}
-          ></div>
+          <div className="h-1 w-full" style={{ backgroundColor: value }}></div>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-2.5">
-        <CirclePicker color={value} onChange={onChange}></CirclePicker>
+        <CompactPicker color={value} onChange={onChange} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -332,7 +355,7 @@ export const Toolbar = () => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
         <TextColorButton></TextColorButton>
-        {/* Highlight Color */}
+        <HighlightColorButton></HighlightColorButton>
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         {/*  Link*/}
         {/* Image  */}
