@@ -13,6 +13,7 @@ import Underline from "@tiptap/extension-underline";
 import ImageResize from "tiptap-extension-resize-image";
 import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
+import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import { Color } from "@tiptap/extension-color";
 import { useEditorStore } from "./use-editor-store";
@@ -76,6 +77,9 @@ export const Editor = () => {
         openOnClick: false,
         autolink: true,
         defaultProtocol: "https",
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
       }),
     ],
     content: `
