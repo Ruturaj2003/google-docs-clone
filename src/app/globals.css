@@ -159,6 +159,17 @@ body {
       margin-bottom: 0.25em;
     }
   }
+
+  /* Link styles */
+  a {
+    color: #9d1cff;
+    cursor: pointer;
+
+    &:hover {
+      color: #11dcf7;
+    }
+  }
+
   /* Task list specific styles */
   ul[data-type="taskList"] {
     list-style: none;
