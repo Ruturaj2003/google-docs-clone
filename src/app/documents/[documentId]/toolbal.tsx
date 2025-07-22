@@ -754,7 +754,6 @@ export const Toolbar = () => {
         })}
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         <FontFamilyButtom />
-
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />
         <HeadingLevelButton />
         <Separator orientation="vertical" className="h-6 bg-neutral-300" />

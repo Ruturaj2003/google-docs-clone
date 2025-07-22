@@ -20,6 +20,7 @@ import { useEditorStore } from "./use-editor-store";
 // Custom
 import { FontSizeExtension } from "@/extensions/font-size";
 import { LineHeightExetension } from "@/extensions/line-height";
+import { Ruler } from "./ruler";
 
 export const Editor = () => {
   const { setEditor } = useEditorStore();
@@ -119,6 +120,8 @@ export const Editor = () => {
     print:p-0
     "
       >
+        <Ruler />
+
         <div
           className="min-w-max flex justify-center w-[816px] py-4 
       print:py-0
