@@ -19,6 +19,7 @@ import { Color } from "@tiptap/extension-color";
 import { useEditorStore } from "./use-editor-store";
 // Custom
 import { FontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExetension } from "@/extensions/line-height";
 
 export const Editor = () => {
   const { setEditor } = useEditorStore();
@@ -84,6 +85,9 @@ export const Editor = () => {
         types: ["heading", "paragraph"],
       }),
       FontSizeExtension,
+      LineHeightExetension.configure({
+        types: ["heading", "paragraph"],
+      }),
     ],
     content: `
         <table>
