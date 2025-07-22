@@ -11,6 +11,8 @@ import {
   ImageIcon,
   ItalicIcon,
   Link2Icon,
+  ListIcon,
+  ListOrderedIcon,
   ListTodoIcon,
   LucideIcon,
   MessageSquarePlusIcon,
@@ -45,6 +47,61 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+const ListButton = () => {
+  const { editor } = useEditorStore();
+
+  type ListItem = {
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    isActive: () => boolean;
+    onClick: () => void;
+  };
+
+  const lists: ListItem[] = [
+    {
+      label: "Bullet List",
+      icon: ListIcon,
+      isActive: () => editor?.isActive("bulletList") ?? false,
+      onClick: () => editor?.chain().focus().toggleBulletList().run(),
+    },
+    {
+      label: "Ordered List",
+      icon: ListOrderedIcon,
+      isActive: () => editor?.isActive("orderedList") ?? false,
+      onClick: () => editor?.chain().focus().toggleOrderedList().run(),
+    },
+  ];
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={
+            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          }
+        >
+          <ListIcon className="size-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {lists.map(({ label, onClick, icon: Icon, isActive }) => (
+          <button
+            className={cn(
+              "flex items-center gap-x-2 py-1 rounded-sm hover:bg-neutral-200/80",
+              isActive() && "bg-neutral-200/80"
+            )}
+            key={label}
+            onClick={onClick}
+          >
+            <Icon className="size-4" />
+            <span>{label}</span>
+          </button>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const AlignButton = () => {
   const { editor } = useEditorStore();
@@ -556,7 +613,7 @@ export const Toolbar = () => {
         <ImageButton />
         <AlignButton />
         {/* Line Height */}
-        {/* List */}
+        <ListButton />
         {sections[2].map((item) => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
