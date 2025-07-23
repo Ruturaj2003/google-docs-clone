@@ -181,22 +181,38 @@ export const Navbar = () => {
                         Text
                       </MenubarSubTrigger>
                       <MenubarSubContent>
-                        <MenubarItem>
+                        <MenubarItem
+                          onClick={() =>
+                            editor?.chain().focus().toggleBold().run()
+                          }
+                        >
                           <BoldIcon className="mr-2 size-4" />
                           Bold
                           <MenubarShortcut>Ctrl + B</MenubarShortcut>
                         </MenubarItem>{" "}
-                        <MenubarItem>
+                        <MenubarItem
+                          onClick={() =>
+                            editor?.chain().focus().toggleItalic().run()
+                          }
+                        >
                           <ItalicIcon className="mr-2 size-4" />
                           Italic
                           <MenubarShortcut>Ctrl + I</MenubarShortcut>
                         </MenubarItem>{" "}
-                        <MenubarItem>
+                        <MenubarItem
+                          onClick={() =>
+                            editor?.chain().focus().toggleUnderline().run()
+                          }
+                        >
                           <UnderlineIcon className="mr-2 size-4" />
                           Underline
                           <MenubarShortcut>Ctrl + U</MenubarShortcut>
                         </MenubarItem>{" "}
-                        <MenubarItem>
+                        <MenubarItem
+                          onClick={() =>
+                            editor?.chain().focus().toggleStrike().run()
+                          }
+                        >
                           <Strikethrough className="mr-2 size-4" />
                           Strike Through&nbsp;&nbsp;
                           <MenubarShortcut>Ctrl + S</MenubarShortcut>
