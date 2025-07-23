@@ -38,6 +38,15 @@ import { useEditorStore } from "./use-editor-store";
 
 export const Navbar = () => {
   const { editor } = useEditorStore();
+
+  const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
+    editor
+      ?.chain()
+      .focus()
+      .insertTable({ rows, cols, withHeaderRow: false })
+      .run();
+  };
+
   return (
     <>
       <nav className="flex items-center justify-between">
@@ -142,10 +151,19 @@ export const Navbar = () => {
                     <MenubarSub>
                       <MenubarSubTrigger>Table</MenubarSubTrigger>
                       <MenubarSubContent>
-                        <MenubarItem>1 X 1 </MenubarItem>
-                        <MenubarItem>2 X 2 </MenubarItem>
-                        <MenubarItem>3 X 3 </MenubarItem>
-                        <MenubarItem>4 X 4 </MenubarItem>
+                        {Array.from({ length: 4 }, (_, i) => {
+                          const size = i + 1;
+                          return (
+                            <MenubarItem
+                              key={`${size}x${size}`}
+                              onClick={() =>
+                                insertTable({ rows: size, cols: size })
+                              }
+                            >
+                              {size} × {size}
+                            </MenubarItem>
+                          );
+                        })}
                       </MenubarSubContent>
                     </MenubarSub>
                   </MenubarContent>

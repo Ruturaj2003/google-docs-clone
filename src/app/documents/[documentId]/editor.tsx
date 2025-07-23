@@ -90,46 +90,15 @@ export const Editor = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: `
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-      `,
+
     immediatelyRender: false,
   });
   return (
     <>
-      <div
-        className="
-    size-full 
-    overflow-x-auto 
-    bg-[#e3e7ec] px-4 
-    print:bg-white 
-    print:overflow-visible 
-    print:p-0
-    "
-      >
+      <div className="size-full overflow-x-auto bg-[#e3e7ec] px-4 print:overflow-visible print:bg-white print:p-0">
         <Ruler />
 
-        <div
-          className="min-w-max flex justify-center w-[816px] py-4 
-      print:py-0
-      mx-auto
-      print:w-full
-      print:min-w-0
-      "
-        >
+        <div className="mx-auto flex w-[816px] min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0">
           <EditorContent editor={editor} />
         </div>
       </div>
