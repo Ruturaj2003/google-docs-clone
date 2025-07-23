@@ -58,7 +58,7 @@ export const Ruler = () => {
         // Constrain the right margin within allowed limits
         const constrainedRightPosition = Math.min(
           newRightPosition,
-          maxRightPosition
+          maxRightPosition,
         );
 
         // Update right margin state
@@ -86,12 +86,9 @@ export const Ruler = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        className="h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
+        className="relative mx-auto flex h-6 w-[816px] select-none items-end border-b border-gray-300 print:hidden"
       >
-        <div
-          className="max-w-[816px] mx-auto w-full h-full relative"
-          id="ruler-container"
-        >
+        <div className="relative h-full w-full" id="ruler-container">
           <Marker
             position={leftMargin}
             isLeft={true}
@@ -119,29 +116,21 @@ export const Ruler = () => {
                   >
                     {marker % 10 === 0 && (
                       <>
-                        <div className="absolute bottom-0 w-[1px] h-2 bg-neutral-500"></div>
-                        <span className="absolute bottom-2 text-[10px] text-neutral-500 transform -translate-x-1/2">
+                        <div className="absolute bottom-0 h-2 w-[1px] bg-neutral-500"></div>
+                        <span className="absolute bottom-2 -translate-x-1/2 transform text-[10px] text-neutral-500">
                           {marker / 10 + 1}
                         </span>
                       </>
                     )}
                     {marker % 5 === 0 && marker % 10 !== 0 && (
                       <>
-                        <div
-                          className="absolute bottom-0  
-                        w-[1px] h-1.5 bg-neutral-500
-                        "
-                        ></div>
+                        <div className="absolute bottom-0 h-1.5 w-[1px] bg-neutral-500"></div>
                       </>
                     )}
 
                     {marker % 5 !== 0 && (
                       <>
-                        <div
-                          className="absolute bottom-0  
-                        w-[1px] h-1 bg-neutral-500
-                        "
-                        ></div>
+                        <div className="absolute bottom-0 h-1 w-[1px] bg-neutral-500"></div>
                       </>
                     )}
                   </div>
@@ -173,16 +162,16 @@ const Marker = ({
   return (
     <>
       <div
-        className="absolute top-0 w-4 h-full cursor-ew-resize  z-[5] group -ml-2"
+        className="group absolute top-0 z-[5] -ml-2 h-full w-4 cursor-ew-resize"
         style={{
           [isLeft ? "left" : "right"]: `${position}px`,
         }}
         onMouseDown={onMouseDown}
         onDoubleClick={onDoubleClick}
       >
-        <ChevronDown className="absolute left-1/2 top-0 h-full  fill-blue-500 transform -translate-x-1/2 " />
+        <ChevronDown className="absolute left-1/2 top-0 h-full -translate-x-1/2 transform fill-blue-500" />
         <div
-          className="absolute left-1/2 top-4 transform -translate-x-1/2 transition-opacity duration-150"
+          className="absolute left-1/2 top-4 -translate-x-1/2 transform transition-opacity duration-150"
           style={{
             height: "100vh",
             width: "1px",
