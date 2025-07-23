@@ -34,7 +34,10 @@ import {
 } from "lucide-react";
 import { BsFilePdf } from "react-icons/bs";
 
+import { useEditorStore } from "./use-editor-store";
+
 export const Navbar = () => {
+  const { editor } = useEditorStore();
   return (
     <>
       <nav className="flex items-center justify-between">
@@ -113,12 +116,16 @@ export const Navbar = () => {
                     Edit
                   </MenubarTrigger>
                   <MenubarContent>
-                    <MenubarItem>
+                    <MenubarItem
+                      onClick={() => editor?.chain().focus().undo().run()}
+                    >
                       <Undo2Icon className="mr-2 size-4" />
                       Undo
                       <MenubarShortcut>Ctrl + Z</MenubarShortcut>
                     </MenubarItem>
-                    <MenubarItem>
+                    <MenubarItem
+                      onClick={() => editor?.chain().focus().redo().run()}
+                    >
                       <Redo2Icon className="mr-2 size-4" />
                       Redo
                       <MenubarShortcut>Ctrl + Y</MenubarShortcut>
