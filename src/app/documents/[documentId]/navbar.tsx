@@ -47,6 +47,45 @@ export const Navbar = () => {
       .run();
   };
 
+  const onDownload = (blob: Blob, filename: string) => {
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+  };
+
+  const onSaveText = () => {
+    if (!editor) return;
+    const content = editor.getText();
+    const blob = new Blob([content], {
+      type: "text/plain",
+    });
+
+    onDownload(blob, "TextDocument.txt"); // TODO : Use DOCUMENT NAME
+  };
+
+  const onSaveHTML = () => {
+    if (!editor) return;
+    const content = editor.getHTML();
+    const blob = new Blob([content], {
+      type: "text/html",
+    });
+
+    onDownload(blob, "HTMLDocument.html"); // TODO : Use DOCUMENT NAME
+  };
+
+  const onSaveJSON = () => {
+    if (!editor) return;
+    const content = editor.getJSON();
+    const blob = new Blob([JSON.stringify(content)], {
+      type: "application/json",
+    });
+
+    onDownload(blob, "JSONDocument.json"); // TODO : Use DOCUMENT NAME
+  };
+
   return (
     <>
       <nav className="flex items-center justify-between">
@@ -79,19 +118,19 @@ export const Navbar = () => {
 
                       {/* Save Options */}
                       <MenubarSubContent>
-                        <MenubarItem>
+                        <MenubarItem onClick={onSaveJSON}>
                           <FileJsonIcon className="mr-2 size-4" />
                           JSON
                         </MenubarItem>
-                        <MenubarItem>
+                        <MenubarItem onClick={onSaveHTML}>
                           <Globe2Icon className="mr-2 size-4" />
                           HTML
                         </MenubarItem>
-                        <MenubarItem>
+                        <MenubarItem onClick={() => window.print()}>
                           <BsFilePdf className="mr-2 size-4" />
                           PDF
                         </MenubarItem>
-                        <MenubarItem>
+                        <MenubarItem onClick={onSaveText}>
                           <FileTextIcon className="mr-2 size-4" />
                           Text
                         </MenubarItem>
@@ -219,7 +258,11 @@ export const Navbar = () => {
                         </MenubarItem>
                       </MenubarSubContent>
                     </MenubarSub>
-                    <MenubarItem>
+                    <MenubarItem
+                      onClick={() =>
+                        editor?.chain().focus().unsetAllMarks().run()
+                      }
+                    >
                       <RemoveFormattingIcon className="mr-2 size-4" />
                       Clear Formatting
                     </MenubarItem>
