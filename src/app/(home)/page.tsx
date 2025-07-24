@@ -6,9 +6,9 @@ import { api } from "../../../convex/_generated/api";
 
 export default function Home() {
   const documents = useQuery(api.documents.getDocuments);
-  if (documents === undefined) {
-    return <p>The Documents are being Summoned</p>;
-  }
+  // if (documents === undefined) {
+  //   return <p>The Documents are being Summoned</p>;
+  // }
   return (
     <>
       <div className="flex min-h-screen flex-col">
