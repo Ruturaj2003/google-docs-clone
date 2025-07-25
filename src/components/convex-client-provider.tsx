@@ -8,7 +8,7 @@ import {
 } from "convex/react";
 import { ReactNode } from "react";
 
-import { ClerkProvider, SignInButton, useAuth } from "@clerk/nextjs";
+import { ClerkProvider, SignIn, useAuth } from "@clerk/nextjs";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
@@ -30,7 +30,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
               You shall not pass... <br /> Please log in to continue.
             </p>
             <div className="rounded-xl bg-white p-6 shadow-md">
-              <SignInButton mode="modal" />
+              <SignIn routing="hash" />
             </div>
           </div>
         </Unauthenticated>
