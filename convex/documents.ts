@@ -3,17 +3,36 @@ import { mutation, query } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
 
 /**
- * Query: Get paginated list of documents
- * ---------------------------------------
- * - Uses pagination options passed by the client
- * - Returns a page of documents from the "documents" table
+ * Query: Get paginated or searched documents
+ * ------------------------------------------
+ * - Accepts pagination options and optional search string
+ * - If search is provided, uses search index to match titles
+ * - Returns documents owned by the authenticated user
  */
 export const getDocuments = query({
   args: {
     paginationOpts: paginationOptsValidator,
+    search: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.query("documents").paginate(args.paginationOpts);
+    const user = await ctx.auth.getUserIdentity();
+    if (!user) {
+      throw new ConvexError("Unauthorized");
+    }
+
+    if (args.search) {
+      return await ctx.db
+        .query("documents")
+        .withSearchIndex("search_title", (q) =>
+          q.search("title", args.search!).eq("ownerId", user.subject),
+        )
+        .paginate(args.paginationOpts);
+    }
+
+    return await ctx.db
+      .query("documents")
+      .withIndex("by_owner_id", (q) => q.eq("ownerId", user.subject))
+      .paginate(args.paginationOpts);
   },
 });
 
