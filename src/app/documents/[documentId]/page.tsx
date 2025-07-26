@@ -1,3 +1,4 @@
+import { Room } from "@/app/Room";
 import { Editor } from "./editor";
 import { Navbar } from "./navbar";
 import { Toolbar } from "./toolbal";
@@ -16,7 +17,9 @@ const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
           <Toolbar></Toolbar>
         </div>
         <div className="pt-[114px] print:pt-0">
-          <Editor></Editor>
+          <Room>
+            <Editor></Editor>
+          </Room>
         </div>
         {/* Tmp */}
         <h1 className="hidden">{documentId}</h1>
