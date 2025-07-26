@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
-import { UserButton } from "@clerk/nextjs";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
   return (
@@ -14,7 +14,17 @@ export const Navbar = () => {
           <h3 className="text-xl">C-Doc</h3>
         </div>
         <SearchInput />
-        <UserButton />
+
+        <div className="flex items-center gap-3 pl-6">
+          <OrganizationSwitcher
+            // To cause Refresh and get new JWT token
+            afterCreateOrganizationUrl={"/"}
+            afterLeaveOrganizationUrl="/"
+            afterSelectOrganizationUrl={"/"}
+            afterSelectPersonalUrl={"/"}
+          />
+          <UserButton />
+        </div>
         <div />
       </nav>
     </>
