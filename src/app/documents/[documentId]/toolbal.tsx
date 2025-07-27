@@ -82,20 +82,20 @@ const LineHeightButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <ListCollapseIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
         {lineHeights.map(({ label, value }) => {
           return (
             <button
               className={cn(
-                "flex items-center gap-x-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                "flex items-center gap-x-2 rounded-sm py-1 hover:bg-neutral-200/80",
                 editor?.getAttributes("paragraph").lineHeight === value &&
-                  "bg-neutral-200/80"
+                  "bg-neutral-200/80",
               )}
               key={label}
               onClick={() => editor?.chain().focus().setLineHeight(value).run()}
@@ -163,7 +163,7 @@ const FontSizeButton = () => {
         <button
           onClick={decrement}
           className={
-            "h-7 w-7 shrink-0 flex   items-center justify-center rouded-sm hover:bg-neutral-200/80  text-sm"
+            "rouded-sm flex h-7 w-7 shrink-0 items-center justify-center text-sm hover:bg-neutral-200/80"
           }
         >
           <MinusIcon className="size-4" />
@@ -171,7 +171,7 @@ const FontSizeButton = () => {
         {isEditing ? (
           <input
             className={
-              "h-7 w-10   border border-neutral-400 rouded-sm bg-transparent focus:outline-none focus:ring-0  text-sm text-center"
+              "rouded-sm h-7 w-10 border border-neutral-400 bg-transparent text-center text-sm focus:outline-none focus:ring-0"
             }
             type="text"
             value={inputValue}
@@ -186,7 +186,7 @@ const FontSizeButton = () => {
               setFontSize(currentFontSize);
             }}
             className={
-              "h-7 w-10   border border-neutral-400 rouded-sm bg-transparent cursor-text  text-sm text-center"
+              "rouded-sm h-7 w-10 cursor-text border border-neutral-400 bg-transparent text-center text-sm"
             }
           >
             {currentFontSize}
@@ -195,7 +195,7 @@ const FontSizeButton = () => {
         <button
           onClick={increment}
           className={
-            "h-7 w-7 shrink-0 flex   items-center justify-center rouded-sm hover:bg-neutral-200/80  text-sm"
+            "rouded-sm flex h-7 w-7 shrink-0 items-center justify-center text-sm hover:bg-neutral-200/80"
           }
         >
           <PlusIcon className="size-4" />
@@ -235,18 +235,18 @@ const ListButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <ListIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
         {lists.map(({ label, onClick, icon: Icon, isActive }) => (
           <button
             className={cn(
-              "flex items-center gap-x-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              isActive() && "bg-neutral-200/80"
+              "flex items-center gap-x-2 rounded-sm py-1 hover:bg-neutral-200/80",
+              isActive() && "bg-neutral-200/80",
             )}
             key={label}
             onClick={onClick}
@@ -291,19 +291,19 @@ const AlignButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <AlignLeftIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
         {alignments.map(({ label, value, icon: Icon }) => {
           return (
             <button
               className={cn(
-                "flex items-center gap-x-2 py-1 rounded-sm hover:bg-neutral-200/80",
-                editor?.isActive({ textAlign: value }) && "bg-neutral-200/80"
+                "flex items-center gap-x-2 rounded-sm py-1 hover:bg-neutral-200/80",
+                editor?.isActive({ textAlign: value }) && "bg-neutral-200/80",
               )}
               key={label}
               onClick={() => editor?.chain().focus().setTextAlign(value).run()}
@@ -354,7 +354,7 @@ const ImageButton = () => {
         <DropdownMenuTrigger asChild>
           <button
             className={
-              "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+              "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
             }
           >
             <ImageIcon className="size-4" />
@@ -362,12 +362,12 @@ const ImageButton = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem onClick={onUpload}>
-            <UploadIcon className="size-4 mr-2"></UploadIcon>
+            <UploadIcon className="mr-2 size-4"></UploadIcon>
             Upload
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
-            <SearchIcon className="size-4 mr-2"></SearchIcon>
+            <SearchIcon className="mr-2 size-4"></SearchIcon>
             Paste Image Url
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -418,13 +418,13 @@ const LinkButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <Link2Icon className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-2.5 flex items-center gap-x-2">
+      <DropdownMenuContent className="flex items-center gap-x-2 p-2.5">
         <Input
           placeholder="Paste Link"
           value={value}
@@ -448,7 +448,7 @@ const HighlightColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <HighlighterIcon className="size-4" />
@@ -475,7 +475,7 @@ const TextColorButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex  flex-col items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <span className="text-xs">A</span>
@@ -543,14 +543,14 @@ const HeadingLevelButton = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 min-w-7 shrink-0 flex items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 min-w-7 shrink-0 items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <span className="truncate">{getCurrentHeading()}</span>
           <ChevronDownIcon className="ml-2 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
         {headings.map(({ label, value, fontSize }) => {
           return (
             <button
@@ -566,10 +566,10 @@ const HeadingLevelButton = () => {
                 }
               }}
               className={cn(
-                "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                "flex items-center gap-x-2 rounded-sm px-2 py-1 hover:bg-neutral-200/80",
                 (value === 0 && !editor?.isActive("heading")) ||
                   (editor?.isActive("heading", { level: value }) &&
-                    "bg-neutral-300/80")
+                    "bg-neutral-300/80"),
               )}
               key={value}
               style={{ fontSize: fontSize }}
@@ -600,7 +600,7 @@ const FontFamilyButtom = () => {
       <DropdownMenuTrigger asChild>
         <button
           className={
-            "h-7 w-[120px] shrink-0 flex items-center justify-center rouded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            "rouded-sm flex h-7 w-[120px] shrink-0 items-center justify-center overflow-hidden px-1.5 text-sm hover:bg-neutral-200/80"
           }
         >
           <span className="truncate">
@@ -609,16 +609,16 @@ const FontFamilyButtom = () => {
           <ChevronDownIcon className="ml-2 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+      <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
         {fonts.map(({ label, value }) => {
           return (
             <button
               onClick={() => editor?.chain().focus().setFontFamily(value).run()}
               key={value}
               className={cn(
-                "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                "flex items-center gap-x-2 rounded-sm px-2 py-1 hover:bg-neutral-200/80",
                 editor?.getAttributes("textStyle").fontFamily === value &&
-                  "bg-neutral-200/80"
+                  "bg-neutral-200/80",
               )}
               style={{ fontFamily: value }}
             >
@@ -646,8 +646,8 @@ const ToolbarButton = ({
     <button
       onClick={onClick}
       className={cn(
-        "text-sm h-7 min-w-7 flex items-center justify-center rounded-sm hover:bg-neutral-200/80",
-        isActive && "bg-neutral-200/80"
+        "flex h-7 min-w-7 items-center justify-center rounded-sm text-sm hover:bg-neutral-200/80",
+        isActive && "bg-neutral-200/80",
       )}
     >
       <Icon className="size-4" />
@@ -693,7 +693,7 @@ export const Toolbar = () => {
           const current = editor?.view.dom.getAttribute("spellcheck");
           editor?.view.dom.setAttribute(
             "spellcheck",
-            current == "false" ? "true" : "false"
+            current == "false" ? "true" : "false",
           );
           console.log(current);
         },
@@ -729,8 +729,8 @@ export const Toolbar = () => {
       {
         label: "Comment",
         icon: MessageSquarePlusIcon,
-        onClick: () => console.log("TODO : Comment"),
-        isActive: false, // TODO : Enable this func
+        onClick: () => editor?.chain().focus().addPendingComment().run(),
+        isActive: editor?.isActive("LiveblocksCommentMark"), // TODO : Enable this func
       },
       {
         label: "List Todo",
@@ -748,7 +748,7 @@ export const Toolbar = () => {
 
   return (
     <>
-      <div className=" bg-[#F1f4f8] overflow-x-auto px-2.5 py-0.5 rounded-xl min-h-[48px] flex  items-center gap-x-0.5 shadow-sm  ">
+      <div className="flex min-h-[48px] items-center gap-x-0.5 overflow-x-auto rounded-xl bg-[#F1f4f8] px-2.5 py-0.5 shadow-sm">
         {sections[0].map((item) => {
           return <ToolbarButton key={item.label} {...item}></ToolbarButton>;
         })}
