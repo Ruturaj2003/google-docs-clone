@@ -44,8 +44,9 @@ export async function POST(req: Request) {
 
   // Check access: owner or member of the same organization
   const isOwner = document.ownerId === user.id;
-  const isOrganizationMember =
-    document.organizationId && document.organizationId === orgId;
+  const isOrganizationMember = !!(
+    document.organizationId && document.organizationId === orgId
+  );
 
   if (!isOwner && !isOrganizationMember) {
     return new Response("Unauthorized not member", { status: 403 });
