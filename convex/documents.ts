@@ -62,6 +62,29 @@ export const getDocuments = query({
 });
 
 /**
+ * QUERY: Get a single document by ID
+ * ----------------------------------
+ * - Requires a valid document ID
+ * - Returns the document if found
+ * - Throws error if document does not exist
+ */
+
+export const getDocumentById = query({
+  args: {
+    id: v.id("documents"),
+  },
+  handler: async (ctx, { id }) => {
+    const document = await ctx.db.get(id);
+
+    if (!document) {
+      throw new ConvexError("Document not found");
+    }
+
+    return document;
+  },
+});
+
+/**
  * MUTATION: Create a new document
  * -------------------------------
  * - Requires authentication
