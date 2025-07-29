@@ -1,13 +1,23 @@
 "use client";
 
+import { useMutation, useStorage } from "@liveblocks/react/suspense";
 import { ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
 
 const markers = Array.from({ length: 83 }, (_, i) => i);
 
 export const Ruler = () => {
-  const [leftMargin, setLeftMargin] = useState(56);
-  const [rightMargin, setRightMargin] = useState(56);
+  const leftMargin = useStorage((root) => root.leftMargin) ?? 56;
+  const rightMargin = useStorage((root) => root.rightMargin) ?? 56;
+
+  const setLeftMargin = useMutation(({ storage }, position: number) => {
+    storage.set("leftMargin", position);
+  }, []);
+  const setRightMargin = useMutation(({ storage }, position: number) => {
+    console.log(position);
+
+    storage.set("rightMargin", position);
+  }, []);
 
   const [isDraggingLeft, setIsDragingLeft] = useState(false);
   const [isDraggingRight, setIsDragingRight] = useState(false);
@@ -79,6 +89,7 @@ export const Ruler = () => {
   const handleLeftDoubleClick = () => {
     setLeftMargin(56);
   };
+
   return (
     <>
       <div

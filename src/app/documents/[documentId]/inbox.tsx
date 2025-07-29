@@ -6,6 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { InboxNotification, InboxNotificationList } from "@liveblocks/react-ui";
 import { useInboxNotifications } from "@liveblocks/react/suspense";
@@ -13,7 +14,16 @@ import { BellIcon } from "lucide-react";
 
 export const Inbox = () => {
   return (
-    <ClientSideSuspense fallback={null}>
+    <ClientSideSuspense
+      fallback={
+        <>
+          <Button variant={"ghost"} className="relative" size={"icon"}>
+            <BellIcon className="size-5"></BellIcon>
+          </Button>
+          <Separator orientation="vertical" className="h-6 w-1" />
+        </>
+      }
+    >
       <InboxMenu />
     </ClientSideSuspense>
   );
@@ -54,6 +64,7 @@ const InboxMenu = () => {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
+      <Separator orientation="vertical" className="h-6" />
     </>
   );
 };
