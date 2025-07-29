@@ -36,6 +36,7 @@ import {
 import { BsFilePdf } from "react-icons/bs";
 
 import { useEditorStore } from "./use-editor-store";
+import { Avatars } from "./avatars";
 
 export const Navbar = () => {
   const { editor } = useEditorStore();
@@ -275,6 +276,7 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3 pl-6">
+          <Avatars />
           <OrganizationSwitcher
             // To cause Refresh and get new JWT token
             afterCreateOrganizationUrl={"/"}

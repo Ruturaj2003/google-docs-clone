@@ -1,4 +1,5 @@
 "use client";
+import { Separator } from "@/components/ui/separator";
 import { ClientSideSuspense } from "@liveblocks/react";
 
 import { useOthers, useSelf } from "@liveblocks/react/suspense";
@@ -10,6 +11,14 @@ interface AvatarProps {
   src: string;
   name: string;
 }
+
+export const Avatars = () => {
+  return (
+    <ClientSideSuspense fallback={null}>
+      <AvatarStack />
+    </ClientSideSuspense>
+  );
+};
 
 const AvatarStack = () => {
   const users = useOthers();
@@ -26,13 +35,14 @@ const AvatarStack = () => {
           </div>
         )}
         <div className="flex">
-            {users.map(({connectionId,info})=>{
-                return(
-                    <Avatar key={connectionId} src={info.avatar} name={info.name}
-                )
-            })}
+          {users.map(({ connectionId, info }) => {
+            return (
+              <Avatar key={connectionId} src={info.avatar} name={info.name} />
+            );
+          })}
         </div>
       </div>
+      <Separator orientation="vertical" className="h-6" />
     </>
   );
 };
@@ -47,7 +57,13 @@ const Avatar = ({ src, name }: AvatarProps) => {
         {name}
       </div>
 
-      <Image alt={name} src={src} className="size-full rounded-full" />
+      <Image
+        width={10}
+        height={10}
+        alt={name}
+        src={src}
+        className="size-full rounded-full"
+      />
     </div>
   );
 };
