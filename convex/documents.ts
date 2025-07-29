@@ -162,3 +162,24 @@ export const updateById = mutation({
     return ctx.db.patch(args.id, { title: args.title });
   },
 });
+
+export const getDocumentByIds = query({
+  args: {
+    ids: v.array(v.id("documents")),
+  },
+  handler: async (ctx, { ids }) => {
+    const documents = [];
+
+    for (const id of ids) {
+      const document = await ctx.db.get(id);
+
+      if (document) {
+        documents.push({ id: document._id, name: document.title });
+      } else {
+        documents.push({ id, name: "[REMOVED]" });
+      }
+    }
+
+    return documents;
+  },
+});
