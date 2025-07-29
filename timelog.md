@@ -19,3 +19,7 @@
 ## 25/7 6:58
 
 ## 26/7 7:42
+
+## 27/7 8:21 // it should have been 9
+
+## 28/8 Will try to complete fully
