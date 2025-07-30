@@ -8,28 +8,28 @@ const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY!,
 });
 
-// Predefined color palette
-const USER_COLORS = [
-  "#FF4C4C",
-  "#4CAF50",
-  "#2196F3",
-  "#FFC107",
-  "#9C27B0",
-  "#00BCD4",
-  "#E91E63",
-  "#FF9800",
-  "#3F51B5",
-  "#8BC34A",
-];
+// // Predefined color palette
+// const USER_COLORS = [
+//   "#FF4C4C",
+//   "#4CAF50",
+//   "#2196F3",
+//   "#FFC107",
+//   "#9C27B0",
+//   "#00BCD4",
+//   "#E91E63",
+//   "#FF9800",
+//   "#3F51B5",
+//   "#8BC34A",
+// ];
 
-// Assign a color based on user ID (stable)
-function getUserColor(userId: string): string {
-  let hash = 0;
-  for (let i = 0; i < userId.length; i++) {
-    hash = userId.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return USER_COLORS[Math.abs(hash) % USER_COLORS.length];
-}
+// // Assign a color based on user ID (stable)
+// function getUserColor(userId: string): string {
+//   let hash = 0;
+//   for (let i = 0; i < userId.length; i++) {
+//     hash = userId.charCodeAt(i) + ((hash << 5) - hash);
+//   }
+//   return USER_COLORS[Math.abs(hash) % USER_COLORS.length];
+// }
 
 // Define expected session claims
 type CustomSessionClaims = {
@@ -64,13 +64,13 @@ export async function POST(req: Request) {
     return new Response("Unauthorized not member", { status: 403 });
   }
 
-  const userColor = getUserColor(user.id);
+  // const userColor = getUserColor(user.id);
 
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
       name: user.fullName ?? "Anonymous",
       avatar: user.imageUrl,
-      color: userColor,
+      // color: userColor, Not supported by Type script
     },
   });
 
