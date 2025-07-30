@@ -16,6 +16,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface RemoveDialogProps {
   documentId: Id<"documents">;
@@ -30,6 +31,22 @@ export const RemoveDialog = ({
 }: RemoveDialogProps) => {
   const remove = useMutation(api.documents.removeById);
   const [isRemoving, setIsRemoving] = useState(false);
+  const router = useRouter();
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsRemoving(true);
+
+    try {
+      await remove({ id: documentId });
+      toast.success("Document removed successfully");
+      router.push("/");
+    } catch (err) {
+      toast.error("Something went wrong: " + err);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   return (
     <AlertDialog>
@@ -38,11 +55,11 @@ export const RemoveDialog = ({
       <AlertDialogContent onClick={(e) => e.stopPropagation()}>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {` Delete the document ${documentTitle} ?`}
+            {`Delete the document "${documentTitle}"?`}
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the
-            document and remove it from your workspace.
+            This action cannot be undone. It will permanently remove this
+            document.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -53,14 +70,7 @@ export const RemoveDialog = ({
           <AlertDialogAction
             className="bg-red-600 hover:bg-red-700"
             disabled={isRemoving}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsRemoving(true);
-              remove({ id: documentId })
-                .then(() => toast.success("Document Removed Successfully"))
-                .catch((err) => toast.error("Something went wrong  " + err))
-                .finally(() => setIsRemoving(false));
-            }}
+            onClick={handleDelete}
           >
             Delete
           </AlertDialogAction>
