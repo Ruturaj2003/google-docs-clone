@@ -8,7 +8,30 @@ const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY!,
 });
 
-// Define the structure of expected session claims
+// Predefined color palette
+const USER_COLORS = [
+  "#FF4C4C",
+  "#4CAF50",
+  "#2196F3",
+  "#FFC107",
+  "#9C27B0",
+  "#00BCD4",
+  "#E91E63",
+  "#FF9800",
+  "#3F51B5",
+  "#8BC34A",
+];
+
+// Assign a color based on user ID (stable)
+function getUserColor(userId: string): string {
+  let hash = 0;
+  for (let i = 0; i < userId.length; i++) {
+    hash = userId.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return USER_COLORS[Math.abs(hash) % USER_COLORS.length];
+}
+
+// Define expected session claims
 type CustomSessionClaims = {
   o?: {
     id: string;
@@ -18,31 +41,20 @@ type CustomSessionClaims = {
 };
 
 export async function POST(req: Request) {
-  // Validate authenticated user
   const user = await currentUser();
-  if (!user) {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  if (!user) return new Response("Unauthorized", { status: 401 });
 
-  // Get session claims (JWT payload)
   const { sessionClaims } = await auth();
-  if (!sessionClaims) {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  if (!sessionClaims) return new Response("Unauthorized", { status: 401 });
 
-  // Extract organization ID from session claims
   const { o } = sessionClaims as CustomSessionClaims;
   const orgId = o?.id;
 
-  // Parse request body
   const { room } = await req.json();
 
-  // Fetch document details from Convex
   const document = await convex.query(api.documents.getDocumentById, {
     id: room,
   });
-
-  // Check access: owner or member of the same organization
   const isOwner = document.ownerId === user.id;
   const isOrganizationMember = !!(
     document.organizationId && document.organizationId === orgId
@@ -52,17 +64,17 @@ export async function POST(req: Request) {
     return new Response("Unauthorized not member", { status: 403 });
   }
 
-  // Prepare Liveblocks session for real-time collaboration
+  const userColor = getUserColor(user.id);
+
   const session = liveblocks.prepareSession(user.id, {
     userInfo: {
-      name: user.fullName ?? "Ano-nni-muss",
+      name: user.fullName ?? "Anonymous",
       avatar: user.imageUrl,
+      color: userColor,
     },
   });
 
   session.allow(room, session.FULL_ACCESS);
-
-  // Authorize and return Liveblocks session
   const { body, status } = await session.authorize();
   return new Response(body, { status });
 }
