@@ -38,8 +38,13 @@ import { BsFilePdf } from "react-icons/bs";
 import { useEditorStore } from "./use-editor-store";
 import { Avatars } from "./avatars";
 import { Inbox } from "./inbox";
+import { Doc } from "../../../../convex/_generated/dataModel";
 
-export const Navbar = () => {
+interface NavbarProps {
+  data: Doc<"documents">;
+}
+
+export const Navbar = ({ data }: NavbarProps) => {
   const { editor } = useEditorStore();
 
   const insertTable = ({ rows, cols }: { rows: number; cols: number }) => {
@@ -66,7 +71,7 @@ export const Navbar = () => {
       type: "text/plain",
     });
 
-    onDownload(blob, "TextDocument.txt"); // TODO : Use DOCUMENT NAME
+    onDownload(blob, `${data.title}.`);
   };
 
   const onSaveHTML = () => {
@@ -76,7 +81,7 @@ export const Navbar = () => {
       type: "text/html",
     });
 
-    onDownload(blob, "HTMLDocument.html"); // TODO : Use DOCUMENT NAME
+    onDownload(blob, `${data.title}.html`);
   };
 
   const onSaveJSON = () => {
@@ -86,7 +91,7 @@ export const Navbar = () => {
       type: "application/json",
     });
 
-    onDownload(blob, "JSONDocument.json"); // TODO : Use DOCUMENT NAME
+    onDownload(blob, `${data.title}.json`);
   };
 
   return (
@@ -98,7 +103,7 @@ export const Navbar = () => {
           </Link>
 
           <div className="flex flex-col">
-            <DocumentInput />
+            <DocumentInput id={data._id} title={data.title} />
             {/* Menu Bar */}
             {/* Menu Bar Container */}
             <div className="flex">
