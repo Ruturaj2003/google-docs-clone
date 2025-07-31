@@ -12,7 +12,7 @@ https://google-docs-clone-j388b65fq-ruturaj2003s-projects.vercel.app/
 
 ### Home Page
 
-![Editor Screenshot](https://ibb.co/WvhKrVcm)
+![Home Page Screenshot]<img width="1920" height="911" alt="Image" src="https://github.com/user-attachments/assets/30526e85-45da-46d6-9b7e-7defe1aa1e54" />
 
 ### Editor Interface
 
