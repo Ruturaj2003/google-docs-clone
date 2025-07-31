@@ -12,7 +12,7 @@ https://google-docs-clone-j388b65fq-ruturaj2003s-projects.vercel.app/
 
 ### Home Page
 
-![Editor Screenshot](./public/preview/homePage.png)
+![Editor Screenshot](https://ibb.co/WvhKrVcm)
 
 ### Editor Interface
 
@@ -132,8 +132,6 @@ MIT
 
 Maintained by [Ruturaj].
 Feel free to reach out or contribute.
-
-```
-
-
-```
+https://ibb.co/WvhKrVcm
+https://ibb.co/MyBGXG42
+https://ibb.co/wNdrRN01
