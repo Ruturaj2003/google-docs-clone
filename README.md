@@ -1,4 +1,3 @@
-```markdown
 # Google Docs Clone
 
 A full-featured Google Docs clone with real-time collaboration, rich text editing, document templates, comments, notifications, user management, and organization workspaces.
@@ -62,7 +61,8 @@ https://google-docs-clone-j388b65fq-ruturaj2003s-projects.vercel.app/
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
-```
+
+````
 
 ### 2. Install Dependencies
 
@@ -70,7 +70,7 @@ https://google-docs-clone-j388b65fq-ruturaj2003s-projects.vercel.app/
 
 ```bash
 npm install
-```
+````
 
 ### 3. Configure Environment Variables
 
