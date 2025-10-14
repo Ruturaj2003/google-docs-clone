@@ -2,8 +2,9 @@
 
 A full-featured Google Docs clone with real-time collaboration, rich text editing, document templates, comments, notifications, user management, and organization workspaces.
 
-**Live Demo**: [View Project on Vercel]
-https://google-docs-clone-j388b65fq-ruturaj2003s-projects.vercel.app/
+## 🌐 Live Demo
+[View Project on Vercel](https://google-docs-clone-nu-three.vercel.app)
+
 
 ---
 
